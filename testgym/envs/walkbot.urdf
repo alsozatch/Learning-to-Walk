@@ -1,0 +1,145 @@
+<?xml version="1.0"?>
+<robot name="walkbot">
+    <link name="pelvis">
+        <collision>
+            <geometry>
+                <box size ="0.8 0.2 0.2"/>
+            </geometry>
+            <origin xyz="0 0 1.9"/>
+        </collision>
+        <inertial>
+            <mass value ="1"/>
+            <inertia ixx="0.0001" ixy="0.0001" ixz="0.0001" iyy="0.0001" iyz="0.0001" izz="0.0001"/>
+        </inertial>
+    </link>
+    
+    
+    <link name="leftThigh">
+        <collision>
+            <geometry>
+                <box size ="0.2 0.2 1.1"/>
+            </geometry>
+            <origin xyz="0 0 -0.55"/>
+        </collision>
+        <inertial>
+            <mass value ="2"/>
+            <inertia ixx="0.0001" ixy="0.0001" ixz="0.0001" iyy="0.0001" iyz="0.0001" izz="0.0001"/>
+        </inertial>
+    </link>
+    
+    <link name="rightThigh">
+        <collision>
+            <geometry>
+                <box size ="0.2 0.2 1.1"/>
+            </geometry>
+            <origin xyz="0 0 -0.55"/>
+        </collision>
+        <inertial>
+            <mass value ="2"/>
+            <inertia ixx="0.0001" ixy="0.0001" ixz="0.0001" iyy="0.0001" iyz="0.0001" izz="0.0001"/>
+        </inertial>
+    </link>
+    
+    <link name="leftCrus">
+        <collision>
+            <geometry>
+                <box size ="0.2 0.2 1.1"/>
+            </geometry>
+            <origin xyz="0 0 -0.55"/>
+        </collision>
+        <inertial>
+            <mass value ="2"/>
+            <inertia ixx="0.0001" ixy="0.0001" ixz="0.0001" iyy="0.0001" iyz="0.0001" izz="0.0001"/>
+        </inertial>
+    </link>
+    
+    <link name="rightCrus">
+        <collision>
+            <geometry>
+                <box size ="0.2 0.2 1.1"/>
+            </geometry>
+            <origin xyz="0 0 -0.55"/>
+        </collision>
+        <inertial>
+            <mass value ="2"/>
+            <inertia ixx="0.0001" ixy="0.0001" ixz="0.0001" iyy="0.0001" iyz="0.0001" izz="0.0001"/>
+        </inertial>
+    </link>
+    
+    <link name="leftFoot">
+        <collision>
+            <geometry>
+                <box size ="0.2 0.4 0.1"/>
+            </geometry>
+            <origin xyz="0 0.1 0.1"/>
+        </collision>
+        <inertial>
+            <mass value ="0.5"/>
+            <inertia ixx="0.0001" ixy="0.0001" ixz="0.0001" iyy="0.0001" iyz="0.0001" izz="0.0001"/>
+        </inertial>
+    </link>
+    
+    <link name="rightFoot">
+        <collision>
+            <geometry>
+                <box size ="0.2 0.4 0.1"/>
+            </geometry>
+            <origin xyz="0 0.1 0.1"/>
+        </collision>
+        <inertial>
+            <mass value ="0.5"/>
+            <inertia ixx="0.0001" ixy="0.0001" ixz="0.0001" iyy="0.0001" iyz="0.0001" izz="0.0001"/>
+        </inertial>
+    </link>
+    
+    <!-- notes for joints:
+        x is half of pelvis x dim + half of left x dim
+        y is 0
+        z (up/down) is high enough so that z + half of leg z dim =
+            pelvis z origin - half of pelvis z dim + 0.1 for some margin
+    
+        axis is the axis of rotation
+    -->
+    <joint name="leftHip" type="continuous">
+        <parent link="pelvis"/>
+        <child link="leftThigh"/>
+        <axis xyz="1 0 0"/>
+        <origin rpy="-0.2 0 0" xyz="-0.5 0 2"/>
+    </joint>
+    
+    <joint name="rightHip" type="continuous">
+        <parent link="pelvis"/>
+        <child link="rightThigh"/>
+        <axis xyz="1 0 0"/>
+        <origin rpy="0.2 0 0" xyz="0.5 0 2"/>
+    </joint>
+    
+    <joint name="leftKnee" type="continuous">
+        <parent link="leftThigh"/>
+        <child link="leftCrus"/>
+        <axis xyz="1 0 0"/>
+        <origin rpy="0 0 0" xyz="0.2 0 -0.9"/>
+    </joint>
+    
+    <joint name="rightKnee" type="continuous">
+        <parent link="rightThigh"/>
+        <child link="rightCrus"/>
+        <axis xyz="1 0 0"/>
+        <origin rpy="0 0 0" xyz="-0.2 0 -0.9"/>
+    </joint>
+    
+    <joint name="leftAnkle" type="fixed">
+        <parent link="leftCrus"/>
+        <child link="leftFoot"/>
+        <axis xyz="1 0 0"/>
+        <origin rpy="0 0 0" xyz="-0.2 0 -1.15"/>
+    </joint>
+    
+    <joint name="rightAnkle" type="fixed">
+        <parent link="rightCrus"/>
+        <child link="rightFoot"/>
+        <axis xyz="1 0 0"/>
+        <origin rpy="0 0 0" xyz="0.2 0 -1.15"/>
+    </joint>
+</robot>
+
