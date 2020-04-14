@@ -10,4 +10,3 @@ Edit the gym wrapper of the walkbot urdf in testgym/envs/walkbot_gym.py or testg
 Edit run.py to change the learning algorithm
 
 Run run.py to start the learning.
-new thing to delete later
