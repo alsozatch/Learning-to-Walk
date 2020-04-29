@@ -1,1 +1,1 @@
-from testgym.envs.walkbot_gym_discrete import TestGymEnv
+from testgym.envs.walkbot_gym_continuous import TestGymEnv
